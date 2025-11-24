@@ -13,7 +13,6 @@ class Usuario(db.Model):
     senha_hash = db.Column(db.String(255), nullable=False)
     data_criacao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     is_admin = db.Column(db.Integer, nullable=False,default=0)
-    sistemas_criados = db.relationship('Sistema', backref='criador', lazy=True,foreign_keys='Sistema.id_criador')
     sistemas_associados = db.relationship('SistemasUsuarios', back_populates='usuario',cascade='all, delete-orphan')
 
     def __repr__(self):
