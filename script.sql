@@ -1,4 +1,4 @@
--- Habilita o suporte a chaves estrangeiras no SQLite (importante!)
+-- Habilita o suporte a chaves estrangeiras no SQLite
 PRAGMA foreign_keys = ON;
 
 -- -----------------------------------------------------
@@ -14,16 +14,16 @@ CREATE TABLE Usuarios (
 );
 
 -- -----------------------------------------------------
--- Tabela 2: Sistemas
+-- Tabela 2: Sistemas (ATUALIZADA)
 -- -----------------------------------------------------
 CREATE TABLE Sistemas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     descricao TEXT,
-    id_criador INTEGER NOT NULL,
-    data_criacao TEXT DEFAULT (DATETIME('now')),
+    -- REMOVIDO: id_criador INTEGER NOT NULL,
+    data_criacao TEXT DEFAULT (DATETIME('now'))
     
-    FOREIGN KEY (id_criador) REFERENCES Usuarios (id)
+    -- REMOVIDO: FOREIGN KEY (id_criador) REFERENCES Usuarios (id)
 );
 
 -- -----------------------------------------------------
@@ -36,7 +36,6 @@ CREATE TABLE SistemasUsuarios (
     status_ativo INTEGER NOT NULL DEFAULT 1, 
     data_vinculo TEXT DEFAULT (DATETIME('now')),
     
-    -- [NOVA COLUNA]
     -- Armazena a data/hora que o acesso expira.
     -- Se for NULL, o acesso não expira.
     data_expira TEXT DEFAULT NULL,
@@ -48,6 +47,3 @@ CREATE TABLE SistemasUsuarios (
     -- Chave primária composta
     PRIMARY KEY (id_sistema, id_usuario)
 );
-```eof
-
----

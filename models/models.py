@@ -14,7 +14,7 @@ class Usuario(db.Model):
     data_criacao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     is_admin = db.Column(db.Integer, nullable=False,default=0)
     sistemas_criados = db.relationship('Sistema', backref='criador', lazy=True,foreign_keys='Sistema.id_criador')
-    sistemas_associados = db.relationship('SistemasUsuarios', back_populates='usuario',ascade='all, delete-orphan')
+    sistemas_associados = db.relationship('SistemasUsuarios', back_populates='usuario',cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<Usuario {self.email}>'
@@ -27,8 +27,6 @@ class Sistema(db.Model):
     nome = db.Column(db.String(200), nullable=False)
     descricao = db.Column(db.Text, nullable=True)
     data_criacao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    
-    id_criador = db.Column(db.Integer, db.ForeignKey('Usuarios.id'), nullable=False)
 
     usuarios_associados = db.relationship('SistemasUsuarios',back_populates='sistema',cascade='all, delete-orphan')
 
