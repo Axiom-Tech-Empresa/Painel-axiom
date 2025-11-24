@@ -15,3 +15,14 @@ class UsuarioService:
             db.session.commit()
             return True
         return False
+    def get_user_by_nome(self, nome):
+        if not nome:
+            return None
+        usuario=self.repo.get_user_by_nome(nome)
+        return usuario
+    def check_password(self, nome, senha):
+        if not nome or not senha:
+            return False
+        hash_senha=hashlib.sha256(senha.encode('utf-8')).hexdigest()
+        is_valid=self.repo.check_password(nome, hash_senha)
+        return is_valid

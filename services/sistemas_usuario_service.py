@@ -30,3 +30,8 @@ class SistemasUsuarioService:
             db.session.rollback()
             print(f"Erro ao criar vinculo: {e}")
             return False
+    def get_association_by_user_and_sistema(self, id_user, id_sistema):
+        if not id_user or not id_sistema:
+            return None
+        association=self.repo.get_association_by_user_and_sistema(id_user, id_sistema)
+        return association

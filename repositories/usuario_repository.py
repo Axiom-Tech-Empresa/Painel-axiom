@@ -15,3 +15,12 @@ class UsuarioRepository:
         db.session.add(novo_usuario)
         db.session.flush()
         return True
+    
+    def get_user_by_nome(self,nome):
+        usuario=Usuario.query.filter_by(nome=nome).first()
+        return usuario
+    def check_password(self,nome,senha):
+        usuario=Usuario.query.filter_by(nome=nome).first()
+        if not usuario:
+            return False
+        return usuario.senha_hash == senha

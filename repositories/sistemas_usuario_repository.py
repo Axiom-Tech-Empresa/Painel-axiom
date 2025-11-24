@@ -15,3 +15,6 @@ class SistemasUsuariosRepository:
         db.session.add(novo_sistema_usuario)
         db.session.flush()
         return True
+    def get_association_by_user_and_sistema(self, id_user, id_sistema):
+        association = SistemasUsuarios.query.filter_by(id_usuario=id_user, id_sistema=id_sistema).first()
+        return association
